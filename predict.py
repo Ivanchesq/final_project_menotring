@@ -16,7 +16,16 @@ def generate_submission(model_path="best_model.joblib", output_path="submission.
 
     model = joblib.load(model_path)
 
-    if not hasattr(model, "named_steps"):
+    if isinstance(model, torch.nn.Module):
+        model.eval()
+        with torch.no_grad():
+            X_inf = X_test.copy()
+            for col in X_inf.select_dtypes(include=["category", "object"]).columns:
+                X_inf[col] = X_inf[col].astype("float32")
+            X_tensor = torch.tensor(X_inf.astype("float32").values, dtype=torch.float32)
+            logits = model(X_tensor)
+            preds = (torch.sigmoid(logits) >= 0.5).int().numpy().flatten()
+    elif not hasattr(model, "named_steps"):
         X_test_inference = X_test.copy()
         for col in X_test_inference.select_dtypes(include=["category", "object"]).columns:
             X_test_inference[col] = X_test_inference[col].astype("int64")
