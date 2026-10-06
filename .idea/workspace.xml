@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34d3688c-f115-4994-99c0-b4814442aa0c" name="Changes" comment="create">
-      <change afterPath="$PROJECT_DIR$/build_dl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EDA and start.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/EDA and start.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/build_baseline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimize.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimize.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,6 +66,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\pycharm\Pipelined\data" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\pycharm\Pipelined\data\titanic" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -87,7 +90,7 @@
       <workItem from="1790343594011" duration="3493000" />
       <workItem from="1790369460382" duration="2562000" />
       <workItem from="1791104570070" duration="12952000" />
-      <workItem from="1791249210941" duration="2127000" />
+      <workItem from="1791249210941" duration="3247000" />
     </task>
     <task id="LOCAL-00001" summary="create">
       <option name="closed" value="true" />
@@ -121,20 +124,46 @@
       <option name="project" value="LOCAL" />
       <updated>1791250256511</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="dl in main">
+      <option name="closed" value="true" />
+      <created>1791251442444</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1791251442444</updated>
+    </task>
+    <task id="LOCAL-00006" summary="use_dl setting">
+      <option name="closed" value="true" />
+      <created>1791251454217</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1791251454217</updated>
+    </task>
+    <task id="LOCAL-00007" summary="create">
+      <option name="closed" value="true" />
+      <created>1791251470562</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1791251470562</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create" />
     <MESSAGE value="dl added" />
     <MESSAGE value="dl" />
-    <option name="LAST_COMMIT_MESSAGE" value="dl" />
+    <MESSAGE value="dl in main" />
+    <MESSAGE value="use_dl setting" />
+    <MESSAGE value="create" />
+    <option name="LAST_COMMIT_MESSAGE" value="create" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Pipelined$main.coverage" NAME="main Coverage Results" MODIFIED="1791251353987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pipelined$main.coverage" NAME="main Coverage Results" MODIFIED="1791252493619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pipelined$config.coverage" NAME="config Coverage Results" MODIFIED="1791251267777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pipelined$main_dl.coverage" NAME="main_dl Coverage Results" MODIFIED="1791251150699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
