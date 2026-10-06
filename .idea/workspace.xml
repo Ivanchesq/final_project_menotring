@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34d3688c-f115-4994-99c0-b4814442aa0c" name="Changes" comment="create">
-      <change afterPath="$PROJECT_DIR$/EDA and start.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build_baseline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/optimize.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_data_titanic.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build_dl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +48,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.config.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.main_dl.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -87,7 +86,8 @@
       <workItem from="1790343322316" duration="212000" />
       <workItem from="1790343594011" duration="3493000" />
       <workItem from="1790369460382" duration="2562000" />
-      <workItem from="1791104570070" duration="12795000" />
+      <workItem from="1791104570070" duration="12952000" />
+      <workItem from="1791249210941" duration="2127000" />
     </task>
     <task id="LOCAL-00001" summary="create">
       <option name="closed" value="true" />
@@ -97,7 +97,31 @@
       <option name="project" value="LOCAL" />
       <updated>1790239267188</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="create">
+      <option name="closed" value="true" />
+      <created>1791206294278</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1791206294278</updated>
+    </task>
+    <task id="LOCAL-00003" summary="dl added">
+      <option name="closed" value="true" />
+      <created>1791250200583</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1791250200583</updated>
+    </task>
+    <task id="LOCAL-00004" summary="dl">
+      <option name="closed" value="true" />
+      <created>1791250256511</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1791250256511</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,9 +129,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create" />
-    <option name="LAST_COMMIT_MESSAGE" value="create" />
+    <MESSAGE value="dl added" />
+    <MESSAGE value="dl" />
+    <option name="LAST_COMMIT_MESSAGE" value="dl" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Pipelined$main.coverage" NAME="main Coverage Results" MODIFIED="1791205705011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pipelined$main.coverage" NAME="main Coverage Results" MODIFIED="1791251353987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pipelined$config.coverage" NAME="config Coverage Results" MODIFIED="1791251267777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pipelined$main_dl.coverage" NAME="main_dl Coverage Results" MODIFIED="1791251150699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
