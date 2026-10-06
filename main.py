@@ -27,7 +27,9 @@ def main():
 
     baseline_score = run_baseline(X, y, Config)
     print(f"Baseline Accuracy: {baseline_score:.4f}")
-
+    dl_model = train_dl_model(X, y, Config)
+    joblib.dump(dl_model, "best_model.joblib")
+    print("PyTorch MLP model successfully trained and saved!")
     study = run_optimization(X, y, Config)
     print(f"Best Optimized Accuracy: {study.best_value:.4f} Parameters: {study.best_params}")
     save_best_model(study, X, y, Config)
