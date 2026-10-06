@@ -4,7 +4,7 @@ from pathlib import Path
 class Config:
     BASE_DIR = Path(__file__).resolve().parent
     RANDOM_STATE = 42
-
+    USE_DL = False
     DATA_DIR = BASE_DIR / "data"
     PROCESSED_DIR = DATA_DIR / "processed"
     TRAIN_DIR = DATA_DIR / "train.csv"
