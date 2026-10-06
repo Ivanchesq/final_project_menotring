@@ -56,7 +56,7 @@ def objective(trial, X, y, config):
             "random_state": config.RANDOM_STATE,
         }
         preprocessor = ColumnTransformer(
-            transformers=[("num", StandardScaler(), config.NUMERIC_COLS)],
+            transformers=[("num", StandardScaler(), config.NUMERIC_COLS_TITANIC)],
             remainder="passthrough"
         )
         model = Pipeline([
@@ -126,7 +126,7 @@ def save_best_model(study, X, y, config, filename="best_model.joblib"):
             "random_state": config.RANDOM_STATE,
         }
         preprocessor = ColumnTransformer(
-            transformers=[("num", StandardScaler(), config.NUMERIC_COLS)],
+            transformers=[("num", StandardScaler(), config.NUMERIC_COLS_TITANIC)],
             remainder="passthrough"
         )
         model = Pipeline([

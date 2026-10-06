@@ -5,13 +5,13 @@ from config import Config
 
 
 def generate_submission(model_path="best_model.joblib", output_path="submission.csv"):
-    test_df = pd.read_csv(Config.PROCESSED_DIR / "test_processed.csv")
+    test_df = pd.read_csv(Config.PROCESSED_DIR_TITANIC / "test_processed.csv")
 
     if "PassengerId" in test_df.columns:
         passenger_ids = test_df["PassengerId"]
         X_test = test_df.drop("PassengerId", axis=1)
     else:
-        raw_test = pd.read_csv(Config.TEST_DIR)
+        raw_test = pd.read_csv(Config.TEST_DIR_TITANIC)
         passenger_ids = raw_test["PassengerId"]
         X_test = test_df
 
@@ -39,8 +39,7 @@ def generate_submission(model_path="best_model.joblib", output_path="submission.
         "Survived": preds.astype(int)
     })
 
-    Config.DATA_DIR.mkdir(parents=True, exist_ok=True)
-    submission_path = Config.DATA_DIR / output_path
+    submission_path = Config.SUBMISSION_DIR_TITANIC
     submission.to_csv(submission_path, index=False)
     print(f"Сабмит успешно сохранен: {submission_path}")
 

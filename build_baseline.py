@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 def run_baseline(X: pd.DataFrame, y: pd.Series, config) -> float:
     preprocessor = ColumnTransformer(
         transformers=[
-            ("num", StandardScaler(), config.NUMERIC_COLS)
+            ("num", StandardScaler(), config.NUMERIC_COLS_TITANIC)
         ],
         remainder="passthrough"
     )

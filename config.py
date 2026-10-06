@@ -4,14 +4,15 @@ from pathlib import Path
 class Config:
     BASE_DIR = Path(__file__).resolve().parent
     RANDOM_STATE = 42
-    USE_DL = False
+    USE_DL = True
     DATA_DIR = BASE_DIR / "data"
-    PROCESSED_DIR = DATA_DIR / "processed"
-    TRAIN_DIR = DATA_DIR / "train.csv"
-    TEST_DIR = DATA_DIR / "test.csv"
-
-    TARGET_COL = "Survived"
-    NUMERIC_COLS = ["Age", "Fare", "FamilySize"]
+    TITANIC_DIR = DATA_DIR / "titanic"
+    PROCESSED_DIR_TITANIC = TITANIC_DIR / "processed"
+    TRAIN_DIR_TITANIC = TITANIC_DIR / "train.csv"
+    TEST_DIR_TITANIC = TITANIC_DIR / "test.csv"
+    SUBMISSION_DIR_TITANIC = TITANIC_DIR / "submission.csv"
+    TARGET_COL_TITANIC = "Survived"
+    NUMERIC_COLS_TITANIC = ["Age", "Fare", "FamilySize"]
 
     N_TRIALS = 50
     CV_FOLDS = 5
