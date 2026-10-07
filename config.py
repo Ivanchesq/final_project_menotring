@@ -13,6 +13,11 @@ class Config:
     SUBMISSION_DIR_TITANIC = TITANIC_DIR / "submission.csv"
     TARGET_COL_TITANIC = "Survived"
     NUMERIC_COLS_TITANIC = ["Age", "Fare", "FamilySize"]
+    HOUSES_PRICES_DIR = DATA_DIR / "house_prices"
+    PROCESSED_DIR_HOUSES_PRICES = HOUSES_PRICES_DIR / "processed"
+    TRAIN_DIR_HOUSES_PRICES = HOUSES_PRICES_DIR / "train.csv"
+    TEST_DIR_HOUSES_PRICES = HOUSES_PRICES_DIR / "test.csv"
+    SUBMISSION_DIR_HOUSES_PRICES = HOUSES_PRICES_DIR / "submission.csv"
 
     N_TRIALS = 50
     CV_FOLDS = 5
