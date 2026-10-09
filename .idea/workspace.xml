@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34d3688c-f115-4994-99c0-b4814442aa0c" name="Changes" comment="fell_ready pipeline for titanic with paths">
-      <change afterPath="$PROJECT_DIR$/EDA house prices.ipynb" afterDir="false" />
+    <list default="true" id="34d3688c-f115-4994-99c0-b4814442aa0c" name="Changes" comment="feature exrtaction -&gt; encoding">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EDA house prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/EDA house prices.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +87,7 @@
       <workItem from="1790343594011" duration="3493000" />
       <workItem from="1790369460382" duration="2562000" />
       <workItem from="1791104570070" duration="12952000" />
-      <workItem from="1791249210941" duration="30612000" />
+      <workItem from="1791249210941" duration="38936000" />
     </task>
     <task id="LOCAL-00001" summary="create">
       <option name="closed" value="true" />
@@ -169,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791357185597</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feature exrtaction -&gt; encoding">
+      <option name="closed" value="true" />
+      <created>1791540703018</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1791540703018</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +191,8 @@
     <MESSAGE value="create" />
     <MESSAGE value="fell_ready pipeline for titanic with paths" />
     <MESSAGE value="path for house prices" />
-    <option name="LAST_COMMIT_MESSAGE" value="path for house prices" />
+    <MESSAGE value="feature exrtaction -&gt; encoding" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature exrtaction -&gt; encoding" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Pipelined$main.coverage" NAME="main Coverage Results" MODIFIED="1791252493619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
