@@ -65,7 +65,7 @@ def run_baseline(X: pd.DataFrame, y: pd.Series, config) -> float:
         model = _build_baseline_titanic(config)
         cv = StratifiedKFold(n_splits=config.CV_FOLDS, shuffle=True, random_state=config.RANDOM_STATE)
         scores = cross_val_score(model, X, y, cv=cv, scoring="accuracy")
-        return float(scores.mean())
+        return float(scores.mean()), None
     if config.DATASET == "house_prices":
         space = config.REGULARIZER_SEARCH_SPACE
         cv = KFold(n_splits=config.CV_FOLDS, shuffle=True, random_state=config.RANDOM_STATE)
@@ -85,4 +85,4 @@ def run_baseline(X: pd.DataFrame, y: pd.Series, config) -> float:
         study = optuna.create_study(direction="minimize")
         study.optimize(objective, n_trials=config.N_TRIALS, show_progress_bar=True)
         print(f"Best linear params: {study.best_params}")
-        return study.best_value
+        return study.best_value, study

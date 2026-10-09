@@ -2,20 +2,25 @@ import numpy as np
 import pandas as pd
 import joblib
 import torch
+import build_dl
+import optimize
 from config import Config
 from encode_house_price_linear import FREQ_COLS, OHE_COLS, ORDINAL_COLS
+from ensemble import AverageEnsemble
 
 
 def _restore_house_strings(X_test):
     data = X_test.copy()
     for col in OHE_COLS + ORDINAL_COLS + FREQ_COLS:
-        data[col] = data[col].astype(str)
+        data[col] = data[col].fillna("None").astype(str)
     return data
 
 
 def _predict_house(model, X_test):
     X_test = _restore_house_strings(X_test)
-    if isinstance(model, torch.nn.Module):
+    if isinstance(model, AverageEnsemble):
+        preds = model.predict(X_test)
+    elif isinstance(model, torch.nn.Module):
         model.eval()
         X_num = model.preprocessor.transform(X_test)
         with torch.no_grad():
@@ -24,13 +29,14 @@ def _predict_house(model, X_test):
         preds = model.predict(X_test)
     else:
         from optimize import _encode_frame
-        preds = model.predict(_encode_frame(X_test, Config))
+        preds = model.predict(_encode_frame(X_test, Config, model_name="lgbm"))
     return np.maximum(np.expm1(preds), 0)
 
 
-def generate_submission(model_path="best_model.joblib", output_path="submission.csv"):
+def generate_submission(model_path=None, output_path="submission.csv"):
+    if model_path is None:
+        model_path = Config.MODEL_PATH
     if Config.DATASET == "house_prices":
-        import build_dl
         test_df = pd.read_csv(Config.PROCESSED_DIR_HOUSES_PRICES / "test_processed.csv")
         ids = pd.read_csv(Config.TEST_DIR_HOUSES_PRICES)["Id"]
         model = joblib.load(model_path)
@@ -53,7 +59,10 @@ def generate_submission(model_path="best_model.joblib", output_path="submission.
 
     model = joblib.load(model_path)
 
-    if isinstance(model, torch.nn.Module):
+    if isinstance(model, AverageEnsemble):
+        proba = model.predict(X_test)
+        preds = (proba >= Config.DL_THRESHOLD).astype(int)
+    elif isinstance(model, torch.nn.Module):
         model.eval()
         with torch.no_grad():
             X_inf = X_test.copy()
@@ -61,7 +70,7 @@ def generate_submission(model_path="best_model.joblib", output_path="submission.
                 X_inf[col] = X_inf[col].astype("float32")
             X_tensor = torch.tensor(X_inf.astype("float32").values, dtype=torch.float32)
             logits = model(X_tensor)
-            preds = (torch.sigmoid(logits) >= 0.5).int().numpy().flatten()
+            preds = (torch.sigmoid(logits) >= Config.DL_THRESHOLD).int().numpy().flatten()
     elif not hasattr(model, "named_steps"):
         X_test_inference = X_test.copy()
         for col in X_test_inference.select_dtypes(include=["category", "object"]).columns:

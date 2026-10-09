@@ -1,11 +1,12 @@
 from config import Config
 from process_data_titanic import process_data
 from build_baseline import run_baseline
-from optimize import run_optimization, save_best_model
-from build_dl import train_dl_model, train_house_model
+from optimize import run_optimization
+from optimize_dl import run_dl_optimization
+from ensemble import fit_ensemble
 from predict import generate_submission
+from results import report_results, rows_from_study
 from process_data_house_price import process_data as process_house_data
-import joblib
 
 
 def main():
@@ -33,16 +34,20 @@ def main():
         X = train_df.drop(Config.TARGET_COL_TITANIC, axis=1)
         y = train_df[Config.TARGET_COL_TITANIC]
 
-        baseline_score = run_baseline(X, y, Config)
+        baseline_score, _ = run_baseline(X, y, Config)
         print(f"Baseline Accuracy: {baseline_score:.4f}")
+        rows = [{"model": "logreg", "metric": baseline_score, "params": {}}]
 
         if USE_DL:
-            dl_model = train_dl_model(X, y, Config)
-            joblib.dump(dl_model, "best_model.joblib")
+            study = run_dl_optimization(X, y, Config)
+            print(f"Best DL Accuracy: {study.best_value:.4f} Parameters: {study.best_params}")
+            rows += rows_from_study(study, "dl")
         else:
             study = run_optimization(X, y, Config)
             print(f"Best Optimized Accuracy: {study.best_value:.4f} Parameters: {study.best_params}")
-            save_best_model(study, X, y, Config)
+            rows += rows_from_study(study, "boost")
+        report_results(rows, Config)
+        fit_ensemble(rows, X, y, Config)
         # я не видел смысла брать и дл и бустинги, поэтому такая логика
         generate_submission()
     elif dataset == "house_prices":
@@ -59,16 +64,20 @@ def main():
         test_df.to_csv(Config.PROCESSED_DIR_HOUSES_PRICES / "test_processed.csv", index=False)
         X = train_df.drop(Config.TARGET_COL_HOUSES_PRICES, axis=1)
         y = train_df[Config.TARGET_COL_HOUSES_PRICES]
-        baseline_score = run_baseline(X, y, Config)
+        baseline_score, baseline_study = run_baseline(X, y, Config)
         print(f"Baseline RMSE: {baseline_score:.4f}")
+        rows = rows_from_study(baseline_study, "linear")
 
         if USE_DL:
-            dl_model = train_house_model(X, y, Config)
-            joblib.dump(dl_model, "best_model.joblib")
+            study = run_dl_optimization(X, y, Config)
+            print(f"Best DL RMSE: {study.best_value:.4f} Parameters: {study.best_params}")
+            rows += rows_from_study(study, "dl")
         else:
             study = run_optimization(X, y, Config)
             print(f"Best Optimized RMSE: {study.best_value:.4f} Parameters: {study.best_params}")
-            save_best_model(study, X, y, Config)
+            rows += rows_from_study(study, "boost")
+        report_results(rows, Config)
+        fit_ensemble(rows, X, y, Config)
         generate_submission()
 
 
