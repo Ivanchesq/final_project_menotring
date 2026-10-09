@@ -18,7 +18,7 @@ class Config:
     TRAIN_DIR_HOUSES_PRICES = HOUSES_PRICES_DIR / "train.csv"
     TEST_DIR_HOUSES_PRICES = HOUSES_PRICES_DIR / "test.csv"
     SUBMISSION_DIR_HOUSES_PRICES = HOUSES_PRICES_DIR / "submission.csv"
-
+    DATASET = "titanic" #"house_prices"
     N_TRIALS = 50
     CV_FOLDS = 5
 
