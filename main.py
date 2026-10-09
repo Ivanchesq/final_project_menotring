@@ -57,6 +57,12 @@ def main():
 
         train_df.to_csv(Config.PROCESSED_DIR_HOUSES_PRICES / "train_processed.csv", index=False)
         test_df.to_csv(Config.PROCESSED_DIR_HOUSES_PRICES / "test_processed.csv", index=False)
+        X = train_df.drop(Config.TARGET_COL_HOUSES_PRICES, axis=1)
+        y = train_df[Config.TARGET_COL_HOUSES_PRICES]
+        baseline_score = run_baseline(X, y, Config)
+        print(f"Baseline RMSE: {baseline_score:.4f}")
+
+
 
 
 

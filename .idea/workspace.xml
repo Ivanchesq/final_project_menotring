@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34d3688c-f115-4994-99c0-b4814442aa0c" name="Changes" comment="END of EDA">
+    <list default="true" id="34d3688c-f115-4994-99c0-b4814442aa0c" name="Changes" comment="encoding">
+      <change afterPath="$PROJECT_DIR$/encode_house_price_linear.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/build_baseline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_data_house_price.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_data_house_price.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +91,7 @@
       <workItem from="1790343594011" duration="3493000" />
       <workItem from="1790369460382" duration="2562000" />
       <workItem from="1791104570070" duration="12952000" />
-      <workItem from="1791249210941" duration="40459000" />
+      <workItem from="1791249210941" duration="44500000" />
     </task>
     <task id="LOCAL-00001" summary="create">
       <option name="closed" value="true" />
@@ -194,7 +197,23 @@
       <option name="project" value="LOCAL" />
       <updated>1791549747850</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="process data from main">
+      <option name="closed" value="true" />
+      <created>1791550498771</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1791550498771</updated>
+    </task>
+    <task id="LOCAL-00015" summary="encoding">
+      <option name="closed" value="true" />
+      <created>1791553793610</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1791553793610</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,10 +229,12 @@
     <MESSAGE value="path for house prices" />
     <MESSAGE value="feature exrtaction -&gt; encoding" />
     <MESSAGE value="END of EDA" />
-    <option name="LAST_COMMIT_MESSAGE" value="END of EDA" />
+    <MESSAGE value="process data from main" />
+    <MESSAGE value="encoding" />
+    <option name="LAST_COMMIT_MESSAGE" value="encoding" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Pipelined$main.coverage" NAME="main Coverage Results" MODIFIED="1791550063818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pipelined$main.coverage" NAME="main Coverage Results" MODIFIED="1791556516085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pipelined$config.coverage" NAME="config Coverage Results" MODIFIED="1791251267777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pipelined$main_dl.coverage" NAME="main_dl Coverage Results" MODIFIED="1791251150699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
