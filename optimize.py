@@ -1,21 +1,35 @@
 import optuna
-from catboost import CatBoostClassifier
-from lightgbm import LGBMClassifier
-from sklearn.ensemble import GradientBoostingClassifier
+import joblib
+from catboost import CatBoostClassifier, CatBoostRegressor
+from lightgbm import LGBMClassifier, LGBMRegressor
+from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.model_selection import StratifiedKFold, cross_val_score, KFold
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-import joblib
+
+
+def _encode_frame(X, config):
+    frame = X.copy()
+    house = config.DATASET == "house_prices"
+    for col in frame.select_dtypes(include=["category", "object"]).columns:
+        if house:
+            frame[col] = frame[col].astype("category").cat.codes
+        else:
+            frame[col] = frame[col].astype("int64")
+    return frame
 
 
 def objective(trial, X, y, config):
-    X_trial = X.copy()
-    classifier_name = trial.suggest_categorical("classifier", ["lgbm", "catboost", "logreg", "gradient_boosting"])
-
-    for col in X_trial.select_dtypes(include=["category", "object"]).columns:
-        X_trial[col] = X_trial[col].astype("int64")
+    house = config.DATASET == "house_prices"
+    choices = (
+        ["lgbm", "catboost", "gradient_boosting"]
+        if house
+        else ["lgbm", "catboost", "logreg", "gradient_boosting"]
+    )
+    classifier_name = trial.suggest_categorical("classifier", choices)
+    X_trial = _encode_frame(X, config)
 
     if classifier_name == "lgbm":
         space = config.LGBM_SEARCH_SPACE
@@ -26,7 +40,7 @@ def objective(trial, X, y, config):
             "verbose": -1,
             "random_state": config.RANDOM_STATE,
         }
-        model = LGBMClassifier(**params)
+        model = (LGBMRegressor if house else LGBMClassifier)(**params)
     elif classifier_name == "gradient_boosting":
         space = config.GRADIENT_BOOST_SEARCH_SPACE
         params = {
@@ -36,7 +50,7 @@ def objective(trial, X, y, config):
             "subsample": trial.suggest_float("gb_subsample", *space["subsample"]),
             "random_state": config.RANDOM_STATE,
         }
-        model = GradientBoostingClassifier(**params)
+        model = (GradientBoostingRegressor if house else GradientBoostingClassifier)(**params)
     elif classifier_name == "catboost":
         space = config.CAT_SEARCH_SPACE
         params = {
@@ -46,8 +60,7 @@ def objective(trial, X, y, config):
             "verbose": 0,
             "random_seed": config.RANDOM_STATE,
         }
-        model = CatBoostClassifier(**params)
-
+        model = (CatBoostRegressor if house else CatBoostClassifier)(**params)
     else:
         space = config.LOGREG_SEARCH_SPACE
         params = {
@@ -57,22 +70,28 @@ def objective(trial, X, y, config):
         }
         preprocessor = ColumnTransformer(
             transformers=[("num", StandardScaler(), config.NUMERIC_COLS_TITANIC)],
-            remainder="passthrough"
+            remainder="passthrough",
         )
         model = Pipeline([
             ("preprocessor", preprocessor),
-            ("classifier", LogisticRegression(**params))
+            ("classifier", LogisticRegression(**params)),
         ])
         X_trial = X
 
+    if house:
+        cv = KFold(n_splits=config.CV_FOLDS, shuffle=True, random_state=config.RANDOM_STATE)
+        scores = cross_val_score(model, X_trial, y, cv=cv, scoring="neg_root_mean_squared_error")
+        return float(-scores.mean())
+
     cv = StratifiedKFold(n_splits=config.CV_FOLDS, shuffle=True, random_state=config.RANDOM_STATE)
     scores = cross_val_score(model, X_trial, y, cv=cv, scoring="accuracy")
-    return scores.mean()
+    return float(scores.mean())
 
 
 def run_optimization(X, y, config):
     optuna.logging.set_verbosity(optuna.logging.WARNING)
-    study = optuna.create_study(direction="maximize")
+    direction = "minimize" if config.DATASET == "house_prices" else "maximize"
+    study = optuna.create_study(direction=direction)
     study.optimize(
         lambda trial: objective(trial, X, y, config),
         n_trials=config.N_TRIALS,
@@ -82,13 +101,10 @@ def run_optimization(X, y, config):
 
 
 def save_best_model(study, X, y, config, filename="best_model.joblib"):
+    house = config.DATASET == "house_prices"
     best_params = study.best_params
     classifier_name = best_params["classifier"]
-
-    X_train = X.copy()
-    if classifier_name in ["lgbm", "catboost", "gradient_boosting"]:
-        for col in X_train.select_dtypes(include=["category", "object"]).columns:
-            X_train[col] = X_train[col].astype("int64")
+    X_train = _encode_frame(X, config)
 
     if classifier_name == "lgbm":
         params = {
@@ -98,8 +114,7 @@ def save_best_model(study, X, y, config, filename="best_model.joblib"):
             "verbose": -1,
             "random_state": config.RANDOM_STATE,
         }
-        model = LGBMClassifier(**params)
-
+        model = (LGBMRegressor if house else LGBMClassifier)(**params)
     elif classifier_name == "catboost":
         params = {
             "iterations": best_params["cat_iterations"],
@@ -108,8 +123,7 @@ def save_best_model(study, X, y, config, filename="best_model.joblib"):
             "verbose": 0,
             "random_seed": config.RANDOM_STATE,
         }
-        model = CatBoostClassifier(**params)
-
+        model = (CatBoostRegressor if house else CatBoostClassifier)(**params)
     elif classifier_name == "gradient_boosting":
         params = {
             "n_estimators": best_params["gb_n_estimators"],
@@ -118,7 +132,7 @@ def save_best_model(study, X, y, config, filename="best_model.joblib"):
             "subsample": best_params["gb_subsample"],
             "random_state": config.RANDOM_STATE,
         }
-        model = GradientBoostingClassifier(**params)
+        model = (GradientBoostingRegressor if house else GradientBoostingClassifier)(**params)
     else:
         params = {
             "C": best_params["logreg_C"],
@@ -127,11 +141,11 @@ def save_best_model(study, X, y, config, filename="best_model.joblib"):
         }
         preprocessor = ColumnTransformer(
             transformers=[("num", StandardScaler(), config.NUMERIC_COLS_TITANIC)],
-            remainder="passthrough"
+            remainder="passthrough",
         )
         model = Pipeline([
             ("preprocessor", preprocessor),
-            ("classifier", LogisticRegression(**params))
+            ("classifier", LogisticRegression(**params)),
         ])
         X_train = X
 
